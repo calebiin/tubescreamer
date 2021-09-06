@@ -195,3 +195,64 @@ function imprimirEtiqueta2(etiqueta: Etiqueta) {
 let miEtiqueta2 = {numero: 10, label: "Esta es mi etiqueta" };
 imprimirEtiqueta2(miEtiqueta2);
 
+//Propiedades opcionales de las interfaces
+interface Cuadrado {
+    color?: string;
+    ancho: number;
+}
+
+function crearCuadrado(cuadrado: Cuadrado): { area: number } {
+    const area = cuadrado.ancho * cuadrado.ancho;
+    return { area: area };
+}
+
+crearCuadrado({ ancho: 10 });
+
+//Propiedades de solo lectura de las interfaces
+interface Punto2 {
+    readonly x: number;
+    readonly y: number;
+}
+
+let punto1: Punto = {
+    x: 10,
+    y: 20
+}
+
+punto1.x = 25;
+
+//Interfaaces vs Types
+interface Transporte {
+    nombre: string;
+}
+
+type Figura = {
+    nombre: string;
+}
+
+//¿Cómo extender una interface?
+interface Auto extends Transporte { 
+    ruedas: number;
+}
+
+//¿Cómo extender un type?
+type Cuadrado2 = Figura & {
+    lados: 4;
+}
+
+//Tipos Literales
+function imprimirLiteral(estadoCivil: 'soltero' | 'casado') {
+    console.log(estadoCivil);
+}
+
+imprimirLiteral('soltero');
+
+//Funciones como expresiones
+function saludar4(fn: (a: string) => void) {
+    fn("Hola Mundo");
+}
+function imprimirEnConsola(s: string) {
+    console.log(s);
+}
+
+saludar(imprimirEnConsola);

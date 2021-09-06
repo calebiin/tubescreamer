@@ -133,3 +133,26 @@ function imprimirEtiqueta2(etiqueta) {
 ;
 var miEtiqueta2 = { numero: 10, label: "Esta es mi etiqueta" };
 imprimirEtiqueta2(miEtiqueta2);
+function crearCuadrado(cuadrado) {
+    var area = cuadrado.ancho * cuadrado.ancho;
+    return { area: area };
+}
+crearCuadrado({ ancho: 10 });
+var punto1 = {
+    x: 10,
+    y: 20
+};
+punto1.x = 25;
+//Tipos Literales
+function imprimirLiteral(estadoCivil) {
+    console.log(estadoCivil);
+}
+imprimirLiteral('soltero');
+//Funciones como expresiones
+function saludar4(fn) {
+    fn("Hola Mundo");
+}
+function imprimirEnConsola(s) {
+    console.log(s);
+}
+saludar(imprimirEnConsola);
