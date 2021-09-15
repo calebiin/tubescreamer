@@ -28,7 +28,7 @@ $scope.eliminar = function(row) {
 
 $scope.agregar = function() {
     $scope.lista.push({
-        nombre: 'Nuevo elemento',
+        nombre: 'Chriss',
         dalta: '',
         dmedia: '',
         dbaja: ''
@@ -36,15 +36,40 @@ $scope.agregar = function() {
 };
 
 $scope.recuperarValores = function() {
+    var jsonDiv = document.getElementById("JSON");
+    jsonDiv.innerHTML = "";
     console.log($scope.lista);
     console.log($scope.lista[0].dalta.trimLeft().trimRight())
     const maxDalta = 
           $scope.lista.filter(element => element.dalta == Math.max.apply(Math, $scope.lista.map(function(o) { return o.dalta; })));
     const minDbaja = $scope.lista.filter(element => element.dbaja == Math.min.apply(Math, $scope.lista.map(function(o) { return o.dbaja; })));
+
+ 
+    //$("#JSON").text('Max: ' + JSON.stringify(maxDalta) + '\nMin: ' + JSON.stringify(minDbaja));
+    var tag = document.createElement("p");
+    var text = document.createTextNode(
+        "Max element(s): " + 
+        JSON.stringify(
+                maxDalta.map(function(x) {
+                return x.nombre;
+            })
+        ) 
+    );
+    tag.appendChild(text);
+    jsonDiv.appendChild(tag);
     
-  
-    $("#JSON").text('Max: ' + JSON.stringify(maxDalta) + '\nMin: ' + JSON.stringify(minDbaja));
-  
+    tag = document.createElement("p");
+    text = document.createTextNode(
+        "Min element(s): " + 
+        JSON.stringify(
+                minDbaja.map(function(x) {
+                return x.nombre;
+            })
+        )
+    );
+    tag.appendChild(text);
+    jsonDiv.appendChild(tag);
+ 
    //$("#JSON").text('EL/los maximo(s) son: ' + maxDalta[0].nombre );
 };
 }]);
@@ -66,3 +91,4 @@ return {
     }
 };
 }]);
+
