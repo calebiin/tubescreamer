@@ -53,6 +53,15 @@
               </div>
               <br>
               <br>
+              
+              <p ng-repeat="item in resultados">
+                <span>
+                  {{item.nombre}}:
+                </span>
+                <span ng-if="item.resultado.length > 0">
+                  {{item.resultado}} ⟶ {{item.valor}}
+                </span>
+              </p>
               <div id='JSON' />
             </div>
           </div>
