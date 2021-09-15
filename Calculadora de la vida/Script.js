@@ -85,14 +85,18 @@ function maximax(){
 }
 
 function coeficiente(){
-    ///Elementos con coeficiente de optimismo-pesimismo
-    const data = [
-        {
-            nombre: "un nombre",
-            coeficiente: 0
-        }
-    ]
-
+    ///Aplico formula a cada elemento del arreglo
+    const p = 0.6;
+    const q = 1 - p;
+    let data = $scope.lista.map((function(element) {
+        return({
+            nombre: element.nombre,
+            coeficiente: p*element.dalta + q*element.dbaja
+        })  
+    }));
+    ///Elementos con coeficiente de optimismo-pesimismo (max de la formula anterior)
+    data = data.filter(element => element.coeficiente == Math.max.apply(Math, data.map(function(o) { return o.coeficiente; })));
+    console.log(data);
     //Asigno el/los elemento(s) que cumple(n) con el criterio
     $scope.resultados.find(element => element.nombre == "Coeficiente de optimismo-pesimismo").resultado = data.map(function(x) {return x.nombre}).join(', ');
 
@@ -135,7 +139,7 @@ $scope.recuperarValores = function() {
     //Llamo las funciones para calcular las fórmulas
     maximin();
     maximax();
-    //coeficiente();
+    coeficiente();
     //razon();
     //minimax();
 };
