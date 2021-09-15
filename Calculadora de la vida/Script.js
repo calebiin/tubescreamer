@@ -96,7 +96,7 @@ function coeficiente(){
     }));
     ///Elementos con coeficiente de optimismo-pesimismo (max de la formula anterior)
     data = data.filter(element => element.coeficiente == Math.max.apply(Math, data.map(function(o) { return o.coeficiente; })));
-    console.log(data);
+
     //Asigno el/los elemento(s) que cumple(n) con el criterio
     $scope.resultados.find(element => element.nombre == "Coeficiente de optimismo-pesimismo").resultado = data.map(function(x) {return x.nombre}).join(', ');
 
