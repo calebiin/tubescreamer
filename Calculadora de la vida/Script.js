@@ -55,7 +55,7 @@ $scope.eliminar = function(row) {
 
 $scope.agregar = function() {
     $scope.lista.push({
-        nombre: 'Chriss',
+        nombre: '',
         dalta: '',
         dmedia: '',
         dbaja: ''
@@ -105,29 +105,53 @@ function coeficiente(){
 }
 
 function razon(){
-    ///Promedio de todos los valores
-    const data = [
-        {
-            nombre: "un nombre",
-            razon: 0
-        }
-    ]
+    ///Aplico formula a cada elemento del arreglo
+    let data = $scope.lista.map((function(e) {
+        return({
+            nombre: e.nombre,
+            razon:  ((parseInt(e.dalta) + parseInt(e.dmedia) + parseInt(e.dbaja))/3).toFixed(2)
+        })  
+    }));
+    ///Elementos con razón suficiente (max de la formula anterior)
+    data = data.filter(element => element.razon == Math.max.apply(Math, data.map(function(o) { return o.razon; })));
 
     //Asigno el/los elemento(s) que cumple(n) con el criterio
     $scope.resultados.find(element => element.nombre == "Razón suficiente").resultado = data.map(function(x) {return x.nombre}).join(', ');
 
     //Asigno el valor que tienen el/los elemento(s) correspondiente(s)
     $scope.resultados.find(element => element.nombre == "Razón suficiente").valor = data[0].razon;  
+
+
+
+    // let laplace =[];
+
+    // for (let i = 0; i<$scope.lista.length; i++){
+    //         let prome = (parseFloat ($scope.lista[i].dalta) + parseFloat($scope.lista[i].dmedia) + parseFloat($scope.lista[i].dbaja)) / 3;
+    //       laplace.push(prome.toFixed(2)); 
+    // }
+
+    // let high = Math.max.apply(null, laplace);
+    // console.log(high);
 }
 
 function minimax(){
-    ///Coste de oportunidad
-    const data = [
-        {
-            nombre: "un nombre",
-            minimax: 0
+    ///Aplico formula a cada elemento del arreglo
+    const alta = Math.max.apply(Math, $scope.lista.map(function(o) { return o.dalta; }));
+    const media = Math.max.apply(Math, $scope.lista.map(function(o) { return o.dmedia; }));
+    const baja = Math.max.apply(Math, $scope.lista.map(function(o) { return o.dbaja; }));
+    let data = $scope.lista.map((function(e) {
+        var elements = {
+            nombre: e.nombre,
+            alta:  alta - e.dalta,
+            medida: media - e.dmedia,
+            baja: baja - e.dbaja
         }
-    ]
+        elements.minimax = ((elements.alta + elements.medida + elements.baja)/3).toFixed(2);
+        return(elements)  
+    }));
+    ///Elementos minimax (min de la formula anterior)
+    data = data.filter(element => element.minimax == Math.min.apply(Math, data.map(function(o) { return o.minimax; })));
+
 
     //Asigno el/los elemento(s) que cumple(n) con el criterio
     $scope.resultados.find(element => element.nombre == "Minimax").resultado = data.map(function(x) {return x.nombre}).join(', ');
@@ -140,8 +164,8 @@ $scope.recuperarValores = function() {
     maximin();
     maximax();
     coeficiente();
-    //razon();
-    //minimax();
+    razon();
+    minimax();
 };
 }]);
 
