@@ -256,3 +256,5 @@ function imprimirEnConsola(s: string) {
 }
 
 saludar(imprimirEnConsola);
+
+//Página 63 del pdf

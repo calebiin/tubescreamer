@@ -120,18 +120,6 @@ function razon(){
 
     //Asigno el valor que tienen el/los elemento(s) correspondiente(s)
     $scope.resultados.find(element => element.nombre == "Razón suficiente").valor = data[0].razon;  
-
-
-
-    // let laplace =[];
-
-    // for (let i = 0; i<$scope.lista.length; i++){
-    //         let prome = (parseFloat ($scope.lista[i].dalta) + parseFloat($scope.lista[i].dmedia) + parseFloat($scope.lista[i].dbaja)) / 3;
-    //       laplace.push(prome.toFixed(2)); 
-    // }
-
-    // let high = Math.max.apply(null, laplace);
-    // console.log(high);
 }
 
 function minimax(){
